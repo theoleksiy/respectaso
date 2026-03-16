@@ -23,12 +23,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DEBUG", "True").lower() in ("true", "1", "yes")
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "0.0.0.0",
-    "respectaso.private",
-]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -91,11 +86,4 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # CSRF trusted origins for local Docker access
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost",
-    "http://127.0.0.1",
-    "http://respectaso.private",
-    "http://localhost:9090",
-    "http://127.0.0.1:9090",
-    "http://respectaso.private:9090",
-]
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
